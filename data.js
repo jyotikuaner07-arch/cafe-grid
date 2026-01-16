@@ -1,7 +1,296 @@
 const cafesData = [
+    // ========== DELHI ==========
     {
         id: 1,
+        name: "Blue Tokai Coffee Roasters",
+        city: "Delhi",
+        address: "Champa Gali, Saidulajab, New Delhi",
+        lat: 28.5244,
+        lng: 77.1855,
+        wifi: true,
+        sockets: "high",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "study"],
+        openHours: { open: 8, close: 23 },
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
+        rating: 4.6,
+        phone: "+91 11 4167 8392"
+    },
+    {
+        id: 2,
+        name: "Cafe Turtle",
+        city: "Delhi",
+        address: "Khan Market, New Delhi",
+        lat: 28.6012,
+        lng: 77.2270,
+        wifi: true,
+        sockets: "medium",
+        seating: "cozy",
+        ac: true,
+        bestFor: ["reading", "meeting"],
+        openHours: { open: 9, close: 22 },
+        image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=300&fit=crop",
+        rating: 4.5,
+        phone: "+91 11 2461 9358"
+    },
+    {
+        id: 3,
+        name: "Kunzum Travel Cafe",
+        city: "Delhi",
+        address: "Hauz Khas Village, New Delhi",
+        lat: 28.5494,
+        lng: 77.1932,
+        wifi: true,
+        sockets: "low",
+        seating: "comfortable",
+        ac: false,
+        bestFor: ["reading", "hangout"],
+        openHours: { open: 11, close: 21 },
+        crowd: { morning: "low", afternoon: "medium", evening: "medium" },
+        rating: 4.7,
+        phone: "+91 98100 47582"
+    },
+
+    // ========== MUMBAI ==========
+    {
+        id: 4,
+        name: "Starbucks Reserve",
+        city: "Mumbai",
+        address: "BKC, Bandra East, Mumbai",
+        lat: 19.0596,
+        lng: 72.8656,
+        wifi: true,
+        sockets: "high",
+        seating: "spacious",
+        ac: true,
+        bestFor: ["work", "study", "meeting"],
+        openHours: { open: 7, close: 23 },
+        image: "https://images.unsplash.com/photo-1559496417-e7f25c6c0542?w=400&h=300&fit=crop",
+        rating: 4.4,
+        phone: "+91 22 6178 3947"
+    },
+    {
+        id: 5,
+        name: "The Pantry",
+        city: "Mumbai",
+        address: "Kala Ghoda, Fort, Mumbai",
+        lat: 18.9280,
+        lng: 72.8314,
+        wifi: true,
+        sockets: "medium",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "reading"],
+        openHours: { open: 8, close: 22 },
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop",
+        rating: 4.3,
+        phone: "+91 22 2267 0981"
+    },
+
+    // ========== BANGALORE ==========
+    {
+        id: 6,
+        name: "Third Wave Coffee",
+        city: "Bangalore",
+        address: "Koramangala 5th Block, Bangalore",
+        lat: 12.9352,
+        lng: 77.6193,
+        wifi: true,
+        sockets: "high",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "study"],
+        openHours: { open: 8, close: 23 },
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
+        rating: 4.7,
+        phone: "+91 80 4147 8293"
+    },
+    {
+        id: 7,
+        name: "Matteo Coffea",
+        city: "Bangalore",
+        address: "Indiranagar, Bangalore",
+        lat: 12.9716,
+        lng: 77.6412,
+        wifi: true,
+        sockets: "high",
+        seating: "spacious",
+        ac: true,
+        bestFor: ["work", "meeting"],
+        openHours: { open: 9, close: 22 },
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
+        rating: 4.6,
+        phone: "+91 80 2520 7593"
+    },
+    {
+        id: 8,
+        name: "Cafe Max",
+        city: "Bangalore",
+        address: "MG Road, Bangalore",
+        lat: 12.9756,
+        lng: 77.6061,
+        wifi: true,
+        sockets: "medium",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["reading", "hangout"],
+        openHours: { open: 10, close: 23 },
+        image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=300&fit=crop",
+        rating: 4.2,
+        phone: "+91 80 4112 2340"
+    },
+
+    // ========== PUNE ==========
+    {
+        id: 9,
+        name: "Vaishali Restaurant",
+        city: "Pune",
+        address: "FC Road, Pune",
+        lat: 18.5196,
+        lng: 73.8350,
+        wifi: false,
+        sockets: "low",
+        seating: "basic",
+        ac: false,
+        bestFor: ["quick", "hangout"],
+        openHours: { open: 7, close: 22 },
+        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop",
+        rating: 4.5,
+        phone: "+91 20 2543 4892"
+    },
+    {
+        id: 10,
+        name: "Dario's",
+        city: "Pune",
+        address: "Koregaon Park, Pune",
+        lat: 18.5362,
+        lng: 73.8958,
+        wifi: true,
+        sockets: "medium",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "reading"],
+        openHours: { open: 8, close: 23 },
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop",
+        rating: 4.4,
+        phone: "+91 20 2614 2697"
+    },
+
+    // ========== CHENNAI ==========
+    {
+        id: 11,
+        name: "Amethyst Cafe",
+        city: "Chennai",
+        address: "Whites Road, Royapettah, Chennai",
+        lat: 13.0569,
+        lng: 80.2620,
+        wifi: true,
+        sockets: "high",
+        seating: "spacious",
+        ac: true,
+        bestFor: ["work", "reading", "meeting"],
+        openHours: { open: 9, close: 22 },
+        image: "https://images.unsplash.com/photo-1559496417-e7f25c6c0542?w=400&h=300&fit=crop",
+        rating: 4.6,
+        phone: "+91 44 2834 2773"
+    },
+    {
+        id: 12,
+        name: "Chamiers Cafe",
+        city: "Chennai",
+        address: "Nungambakkam, Chennai",
+        lat: 13.0569,
+        lng: 80.2423,
+        wifi: true,
+        sockets: "medium",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "study"],
+        openHours: { open: 8, close: 22 },
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
+        rating: 4.3,
+        phone: "+91 44 2833 1818"
+    },
+
+    // ========== KOLKATA ==========
+    {
+        id: 13,
+        name: "Cafe Mezzuna",
+        city: "Kolkata",
+        address: "Elgin Road, Kolkata",
+        lat: 22.5449,
+        lng: 88.3530,
+        wifi: true,
+        sockets: "medium",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "reading"],
+        openHours: { open: 9, close: 22 },
+        image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=300&fit=crop",
+        rating: 4.4,
+        phone: "+91 33 2283 1879"
+    },
+    {
+        id: 14,
+        name: "Flurys",
+        city: "Kolkata",
+        address: "Park Street, Kolkata",
+        lat: 22.5542,
+        lng: 88.3534,
+        wifi: false,
+        sockets: "low",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["quick", "meeting"],
+        openHours: { open: 7, close: 21 },
+        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop",
+        rating: 4.5,
+        phone: "+91 33 2229 7664"
+    },
+
+    // ========== HYDERABAD ==========
+    {
+        id: 15,
+        name: "Autumn Leaf Cafe",
+        city: "Hyderabad",
+        address: "Banjara Hills, Hyderabad",
+        lat: 17.4239,
+        lng: 78.4421,
+        wifi: true,
+        sockets: "high",
+        seating: "comfortable",
+        ac: true,
+        bestFor: ["work", "study"],
+        openHours: { open: 8, close: 23 },
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
+        rating: 4.5,
+        phone: "+91 40 2354 7890"
+    },
+    {
+        id: 16,
+        name: "Roastery Coffee House",
+        city: "Hyderabad",
+        address: "Jubilee Hills, Hyderabad",
+        lat: 17.4326,
+        lng: 78.4071,
+        wifi: true,
+        sockets: "medium",
+        seating: "spacious",
+        ac: true,
+        bestFor: ["work", "meeting"],
+        openHours: { open: 9, close: 22 },
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
+        rating: 4.4,
+        phone: "+91 40 2355 6789"
+    },
+
+    // ========== BHUBANESWAR ==========
+    {
+        id: 17,
         name: "Brew & Code",
+        city: "Bhubaneswar",
+        address: "Patia, Bhubaneswar",
         lat: 20.2961,
         lng: 85.8245,
         wifi: true,
@@ -10,15 +299,15 @@ const cafesData = [
         ac: true,
         bestFor: ["work", "study"],
         openHours: { open: 8, close: 23 },
-        crowd: {
-            morning: "low",
-            afternoon: "medium",
-            evening: "high"
-        }
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
+        rating: 4.5,
+        phone: "+91 98765 43210"
     },
     {
-        id: 2,
+        id: 18,
         name: "The Reading Nook",
+        city: "Bhubaneswar",
+        address: "Saheed Nagar, Bhubaneswar",
         lat: 20.2951,
         lng: 85.8235,
         wifi: true,
@@ -27,15 +316,15 @@ const cafesData = [
         ac: true,
         bestFor: ["reading", "study"],
         openHours: { open: 9, close: 22 },
-        crowd: {
-            morning: "low",
-            afternoon: "low",
-            evening: "medium"
-        }
+        image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=300&fit=crop",
+        rating: 4.7,
+        phone: "+91 98765 43211"
     },
     {
-        id: 3,
+        id: 19,
         name: "Social Hub Cafe",
+        city: "Bhubaneswar",
+        address: "Jaydev Vihar, Bhubaneswar",
         lat: 20.2971,
         lng: 85.8255,
         wifi: true,
@@ -44,78 +333,122 @@ const cafesData = [
         ac: false,
         bestFor: ["meeting", "hangout"],
         openHours: { open: 10, close: 24 },
-        crowd: {
-            morning: "medium",
-            afternoon: "high",
-            evening: "high"
-        }
+        image: "https://images.unsplash.com/photo-1559496417-e7f25c6c0542?w=400&h=300&fit=crop",
+        rating: 4.2,
+        phone: "+91 98765 43212"
     },
+
+    // ========== CUTTACK ==========
     {
-        id: 4,
+        id: 20,
         name: "Quick Sip Express",
-        lat: 20.2941,
-        lng: 85.8225,
+        city: "Cuttack",
+        address: "Link Road, Cuttack",
+        lat: 20.4625,
+        lng: 85.8830,
         wifi: false,
         sockets: "low",
         seating: "basic",
         ac: true,
         bestFor: ["quick"],
         openHours: { open: 7, close: 20 },
-        crowd: {
-            morning: "high",
-            afternoon: "medium",
-            evening: "low"
-        }
+        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop",
+        rating: 4.0,
+        phone: "+91 98765 43213"
     },
+
+    // ========== JAIPUR ==========
     {
-        id: 5,
-        name: "Study Space Cafe",
-        lat: 20.2981,
-        lng: 85.8265,
+        id: 21,
+        name: "Cafe Lazy Mojo",
+        city: "Jaipur",
+        address: "C-Scheme, Jaipur",
+        lat: 26.9124,
+        lng: 75.7873,
         wifi: true,
         sockets: "high",
         seating: "comfortable",
         ac: true,
         bestFor: ["work", "study"],
-        openHours: { open: 8, close: 22 },
-        crowd: {
-            morning: "medium",
-            afternoon: "low",
-            evening: "medium"
-        }
+        openHours: { open: 9, close: 23 },
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=300&fit=crop",
+        rating: 4.6,
+        phone: "+91 141 4024 567"
     },
+
+    // ========== AHMEDABAD ==========
     {
-        id: 6,
-        name: "Cozy Corner Books",
-        lat: 20.2931,
-        lng: 85.8215,
+        id: 22,
+        name: "Cafe Upper Crust",
+        city: "Ahmedabad",
+        address: "Satellite, Ahmedabad",
+        lat: 23.0258,
+        lng: 72.5047,
         wifi: true,
         sockets: "medium",
         seating: "comfortable",
         ac: true,
-        bestFor: ["reading", "work"],
-        openHours: { open: 9, close: 21 },
-        crowd: {
-            morning: "low",
-            afternoon: "medium",
-            evening: "low"
-        }
+        bestFor: ["work", "meeting"],
+        openHours: { open: 8, close: 22 },
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop",
+        rating: 4.3,
+        phone: "+91 79 4003 2890"
     },
+
+    // ========== KOCHI ==========
     {
-        id: 7,
-        name: "Meetup Central",
-        lat: 20.2991,
-        lng: 85.8275,
+        id: 23,
+        name: "Kashi Art Cafe",
+        city: "Kochi",
+        address: "Fort Kochi, Kerala",
+        lat: 9.9674,
+        lng: 76.2428,
+        wifi: true,
+        sockets: "low",
+        seating: "cozy",
+        ac: false,
+        bestFor: ["reading", "hangout"],
+        openHours: { open: 9, close: 21 },
+        image: "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=400&h=300&fit=crop",
+        rating: 4.7,
+        phone: "+91 484 221 5769"
+    },
+
+    // ========== CHANDIGARH ==========
+    {
+        id: 24,
+        name: "Indian Coffee House",
+        city: "Chandigarh",
+        address: "Sector 17, Chandigarh",
+        lat: 30.7410,
+        lng: 76.7791,
+        wifi: false,
+        sockets: "low",
+        seating: "basic",
+        ac: false,
+        bestFor: ["quick", "hangout"],
+        openHours: { open: 8, close: 21 },
+        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop",
+        rating: 4.2,
+        phone: "+91 172 270 4567"
+    },
+
+    // ========== SURAT ==========
+    {
+        id: 25,
+        name: "Unvind Cafe",
+        city: "Surat",
+        address: "Unvind Cafe, 6th Floor, Kalp Business Center, above Iconic, City Light Rd, opp. Pantaloons, Surat, Gujarat 395007",
+        lat: 21.16580381246907,
+        lng: 72.79579338276919,
         wifi: true,
         sockets: "medium",
-        seating: "spacious",
+        seating: "comfortable",
         ac: true,
-        bestFor: ["meeting", "hangout"],
-        openHours: { open: 11, close: 23 },
-        crowd: {
-            morning: "low",
-            afternoon: "high",
-            evening: "high"
-        }
+        bestFor: ["quick", "hangout"],
+        openHours: { open: 11, close: 1 },
+        image: "https://lh3.googleusercontent.com/p/AF1QipM16n-8rfwADvhtvDR2k3FvDtV0u05fVjl6ZVdI=w243-h174-n-k-no-nu",
+        rating: 4.6,
+        phone: "+91 81411 07070"
     }
 ];

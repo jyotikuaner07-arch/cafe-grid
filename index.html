@@ -3,145 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Grid - Find Cafes That Actually Work</title>
+    <title>Cafe Grid</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container header-content">
-            <div class="logo-section">
-                <div class="logo-icon">☕</div>
-                <div>
-                    <h1 class="logo-title">Cafe Grid</h1>
-                    <p class="logo-subtitle">Find cafes that actually work</p>
-                </div>
-            </div>
-            <button class="mobile-filter-btn" id="mobileFilterBtn">
-                <span>Filters</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="4" y1="21" x2="4" y2="14"></line>
-                    <line x1="4" y1="10" x2="4" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12" y2="3"></line>
-                    <line x1="20" y1="21" x2="20" y2="16"></line>
-                    <line x1="20" y1="12" x2="20" y2="3"></line>
-                    <line x1="1" y1="14" x2="7" y2="14"></line>
-                    <line x1="9" y1="8" x2="15" y2="8"></line>
-                    <line x1="17" y1="16" x2="23" y2="16"></line>
+        <div class="header-content">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6F4E37" stroke-width="2">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                    <line x1="14" y1="1" x2="14" y2="4"></line>
                 </svg>
-            </button>
+                <h1>Cafe Grid</h1>
+            </div>
         </div>
     </header>
 
-    <div class="main-container">
+    <div class="main-layout">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-content">
-                <!-- Purpose Selection -->
-                <div class="filter-section">
-                    <div class="filter-header">
-                        <label class="filter-label">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <path d="m21 21-4.35-4.35"></path>
-                            </svg>
-                            Choose Your Purpose
-                        </label>
-                        <button class="reset-btn" id="resetBtn" style="display: none;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                            Reset
-                        </button>
-                    </div>
-                    <div class="purpose-grid">
-                        <button class="purpose-btn" data-purpose="work">
-                            <span class="purpose-icon">💼</span>
-                            <span>Work / Study</span>
-                        </button>
-                        <button class="purpose-btn" data-purpose="meeting">
-                            <span class="purpose-icon">🤝</span>
-                            <span>Meeting</span>
-                        </button>
-                        <button class="purpose-btn" data-purpose="reading">
-                            <span class="purpose-icon">📚</span>
-                            <span>Reading</span>
-                        </button>
-                        <button class="purpose-btn" data-purpose="hangout">
-                            <span class="purpose-icon">👥</span>
-                            <span>Group Hangout</span>
-                        </button>
-                        <button class="purpose-btn" data-purpose="quick">
-                            <span class="purpose-icon">☕</span>
-                            <span>Quick Coffee</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Infrastructure Filters -->
-                <div class="filter-section">
-                    <label class="filter-label">Infrastructure</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="wifiFilter" class="checkbox-input">
-                            <div class="checkbox-content">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
-                                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
-                                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                                    <path d="M12 20h.01"></path>
-                                </svg>
-                                <span>Wi-Fi Available</span>
-                            </div>
-                        </label>
-
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="acFilter" class="checkbox-input">
-                            <div class="checkbox-content">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
-                                </svg>
-                                <span>Air Conditioned</span>
-                            </div>
-                        </label>
-
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="socketsFilter" class="checkbox-input">
-                            <div class="checkbox-content">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
-                                </svg>
-                                <span>Charging Points</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Results Count -->
-                <div class="results-badge">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
+        <aside class="sidebar">
+            <!-- Search -->
+            <div class="search-section">
+                <div class="search-box">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
                     </svg>
-                    <span id="resultsCount">7 cafes found</span>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search cafes..." 
+                        class="search-input"
+                        autocomplete="off"
+                    />
                 </div>
+            </div>
+
+            <!-- Purpose -->
+            <div class="filter-section">
+                <label class="filter-label">Purpose</label>
+                <div class="purpose-tags">
+                    <button class="tag-btn" data-purpose="work">💼 Work</button>
+                    <button class="tag-btn" data-purpose="meeting">🤝 Meeting</button>
+                    <button class="tag-btn" data-purpose="reading">📚 Reading</button>
+                    <button class="tag-btn" data-purpose="hangout">👥 Hangout</button>
+                    <button class="tag-btn" data-purpose="quick">☕ Quick</button>
+                </div>
+            </div>
+
+            <!-- Infrastructure -->
+            <div class="filter-section">
+                <label class="filter-label">Infrastructure</label>
+                <div class="checkbox-list">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="wifiFilter">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6F4E37" stroke-width="2">
+                            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            <path d="M12 20h.01"></path>
+                        </svg>
+                        <span>Wi-Fi</span>
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="acFilter">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6F4E37" stroke-width="2">
+                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+                        </svg>
+                        <span>Air Conditioned</span>
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="socketsFilter">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6F4E37" stroke-width="2">
+                            <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                        <span>Charging Points</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="results-card">
+                <span id="resultsCount">0 cafes found</span>
+                <button id="resetBtn" class="reset-btn" style="display: none;">Reset</button>
             </div>
         </aside>
 
-        <!-- Map Container -->
-        <main class="map-container">
+        <!-- Map -->
+        <main class="map-area">
             <div id="map"></div>
         </main>
     </div>
