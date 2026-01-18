@@ -58,7 +58,7 @@ function initMap() {
 
 function createMap(center) {
     console.log("Creating map at:", center);
-    
+
     // Initialize Leaflet map
     map = L.map('map', {
         center: [center.lat, center.lng],
@@ -88,7 +88,7 @@ function createMap(center) {
         iconSize: [14, 14],
         iconAnchor: [7, 7]
     });
-    
+
     userLocationMarker = L.marker([center.lat, center.lng], { icon: userIcon })
         .addTo(map)
         .bindPopup('<div style="font-family: Inter, sans-serif; font-size: 13px; color: #222;"><strong>📍 Your Location</strong></div>');
@@ -134,7 +134,7 @@ function displayMarkers(cafes) {
 
     cafes.forEach((cafe, index) => {
         console.log(`Adding marker ${index + 1}:`, cafe.name, `at [${cafe.lat}, ${cafe.lng}]`);
-        
+
         const marker = L.marker([cafe.lat, cafe.lng], { icon: customIcon })
             .addTo(map)
             .bindPopup(createInfoWindowContent(cafe), {
@@ -147,6 +147,46 @@ function displayMarkers(cafes) {
     });
 
     console.log("Added", markers.length, "markers to map");
+}
+
+function displayCafeList(cafes) {
+    const cafeListContainer = document.getElementById('cafeList');
+
+    if (!cafeListContainer) {
+        console.warn("Cafe list container not found");
+        return;
+    }
+
+    if (!cafes || cafes.length === 0) {
+        cafeListContainer.innerHTML = '<div class="cafe-list-empty">Search for a city to see cafes</div>';
+        return;
+    }
+
+    cafeListContainer.innerHTML = cafes.map(cafe => `
+        <div class="cafe-list-item" data-cafe-id="${cafe.id}">
+            <div class="cafe-item-header">
+                <div class="cafe-item-name">${cafe.name}</div>
+                ${cafe.rating ? `<div class="cafe-item-rating">⭐ ${cafe.rating}</div>` : ''}
+            </div>
+            <div class="cafe-item-location">📍 ${cafe.city}</div>
+            <div class="cafe-item-tags">
+                ${cafe.wifi ? '<span class="tag">Wi-Fi</span>' : ''}
+                ${cafe.ac ? '<span class="tag">AC</span>' : ''}
+                ${cafe.sockets === "high" || cafe.sockets === "medium" ? '<span class="tag">Charging</span>' : ''}
+            </div>
+        </div>
+    `).join('');
+
+    document.querySelectorAll('.cafe-list-item').forEach(item => {
+        item.addEventListener('click', function () {
+            const cafeId = parseInt(this.getAttribute('data-cafe-id'));
+            navigateToCafe(cafeId);
+
+            // Visual feedback
+            document.querySelectorAll('.cafe-list-item').forEach(i => i.style.background = 'white');
+            this.style.background = '#F5F1ED';
+        });
+    });
 }
 
 function createInfoWindowContent(cafe) {
@@ -196,13 +236,50 @@ function applyFilters() {
     const searchInput = document.getElementById('searchInput');
     const searchQuery = searchInput ? searchInput.value : '';
     
+    console.log("Search query:", searchQuery);
+    
+    // Only show cafes if there's a search query or filters applied
+    if (!searchQuery.trim() && !selectedPurpose && !filters.wifi && !filters.ac && !filters.sockets) {
+        console.log("No filters, clearing display"); 
+        displayMarkers([]);
+        displayCafeList([]); 
+        updateResultsCount(0);
+        updateResetButton();
+        return;
+    }
+    
     if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
-        filteredCafes = filteredCafes.filter(cafe => 
-            cafe.name.toLowerCase().includes(query) ||
-            cafe.city.toLowerCase().includes(query) ||
-            cafe.address.toLowerCase().includes(query)
-        );
+        
+        console.log("Searching for:", query);
+        
+        // Check if searching for a city
+        const cities = [...new Set(cafesData.map(c => c.city))];
+        const matchedCity = cities.find(city => city.toLowerCase().includes(query));
+        
+        console.log("Matched city:", matchedCity); 
+        
+        if (matchedCity) {
+            // Show all cafes in that city
+            filteredCafes = cafesData.filter(cafe => cafe.city === matchedCity);
+            
+            console.log("Filtered cafes for city:", filteredCafes.length); 
+            
+            // Zoom to city
+            if (filteredCafes.length > 0) {
+                const avgLat = filteredCafes.reduce((sum, c) => sum + c.lat, 0) / filteredCafes.length;
+                const avgLng = filteredCafes.reduce((sum, c) => sum + c.lng, 0) / filteredCafes.length;
+                map.setView([avgLat, avgLng], 12, { animate: true });
+            }
+        } else {
+            // Search by cafe name or address
+            filteredCafes = filteredCafes.filter(cafe => 
+                cafe.name.toLowerCase().includes(query) ||
+                cafe.city.toLowerCase().includes(query) ||
+                cafe.address.toLowerCase().includes(query)
+            );
+            console.log("Filtered cafes by name:", filteredCafes.length); 
+        }
     }
 
     if (selectedPurpose) {
@@ -225,11 +302,17 @@ function applyFilters() {
         );
     }
 
-    console.log("Filtered cafes:", filteredCafes.length);
+    console.log("Final filtered cafes:", filteredCafes.length); 
+    console.log("About to call displayCafeList..."); 
+    
     displayMarkers(filteredCafes);
+    displayCafeList(filteredCafes); 
     updateResultsCount(filteredCafes.length);
     updateResetButton();
+    
+    console.log("displayCafeList called!"); 
 }
+
 
 function updateResultsCount(count) {
     const resultsElement = document.getElementById('resultsCount');
@@ -243,7 +326,7 @@ function updateResetButton() {
     const searchInput = document.getElementById('searchInput');
     const searchQuery = searchInput ? searchInput.value : '';
     const hasFilters = selectedPurpose || filters.wifi || filters.ac || filters.sockets || searchQuery.trim();
-    
+
     if (resetBtn) {
         resetBtn.style.display = hasFilters ? 'block' : 'none';
     }
@@ -334,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize map
     initMap();
-    
+
     // Handle window resize
     window.addEventListener('resize', () => {
         if (map) {
